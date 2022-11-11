@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Name Nationality API</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto;
+            background-color: #2196F3;
+            padding: 10px;
+        }
+        .grid-item-header {
+            background-color: #EDD372;
+            border: 1px solid #2196F3;
+            padding: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+        ol {
+            list-style-position: inside;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid-container">
+        <div class="grid-item-header">
+            <p>API: predict nationality of name</p>
+        </div>
+        <div class="grid-item">
+            <input type="text" id="txtName">
+            <input type="button" value="find" id="btnFind">
+            <div id="result">
+            
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    btnFind.onclick = findName;
+    
+    function findName() {
+        fetch("https://api.nationalize.io/" + "?name=" + txtName.value)
+            .then(response => response.json())
+            .then(data => showResult(data));
+    }
+
+    function showResult(data) {
+        const countries = data.country;
+        let ol = document.createElement("ol");
+        for (let country of countries) {
+            let li = document.createElement("li");
+            li.innerText = regionName.of(country.country_id);
+            ol.appendChild(li);
+        }
+        result.innerHTML = "";
+        result.append(ol);
+    }
+    //const regionName = new Intl.DisplayNames(['hr'], { type: 'region' })      countires on croatian language
+    const regionName = new Intl.DisplayNames(['en'], { type: 'region' })        //object enables the consistent translation of language, region and script display names
+
+</script>
+
+</html>
