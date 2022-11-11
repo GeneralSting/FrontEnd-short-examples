@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    background-color: #dcdcdc;
+}
+    /*em -> Relative to the font-size of the element (2em means 2 times the size of the current font)*/
+.bottom-bar {
+    background-color: #eee;
+    margin: 20em auto 0;
+    text-align: center;
+    max-width: 30em;
+    border-radius: 20px 20px 0 0;
+}
+
+.icon {
+    font-size: 1.5em;
+    padding: .5em;
+    margin: 0 .5em .5em .5em;
+    transition: .35s ease-in-out;
+    border-radius: 100%;
+    border: 7px solid #eee;
+}
+
+.active {
+    /*          size * 1.25     go up for 1 em*/
+    transform: scale(1.25) translateY(-1em);
+    background: linear-gradient(135deg, #23f, #702090);
+    border: 7px solid #dcdcdc;
+    color: white;
+}
