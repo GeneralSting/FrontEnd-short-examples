@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        #screenshot-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+    <title>Screenshot</title>
+</head>
+<body>
+    <div id="screenshot-area">
+        <h1>Take Screenshot and download it</h1>
+        <ul>
+            <li>this is dummy list 1</li>
+            <li>this is dummy list 2</li>
+            <li>this is dummy list 3</li>
+            <li>this is dummy list 4</li>
+            <li>this is dummy list 5</li>
+        </ul>
+        <a href="#">Dummy link</a>
+        <div>
+            <p>Click on specific button to take
+                <button id="take-src-only">Screenshot</button> or
+                <button>Download the screenshot</button>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const srcElement = document.querySelector("#screenshot-area"),
+        btns = document.querySelectorAll("button");
+
+        btns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                html2canvas(srcElement).then(canvas => {
+                    if(btn.id === "take-src-only")
+                        return document.body.appendChild(canvas);
+                    const screenshot = document.createElement("a");
+                    screenshot.href = canvas.toDataURL();
+                    screenshot.download = "screenshot.jpg";
+                    screenshot.click();
+                })
+            })
+        })
+    </script>
+</body>
+</html>
